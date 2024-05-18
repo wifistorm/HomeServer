@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windy</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #141414; /* Netflix dark shade */
+            color: #ffffff;
+            height: 100vh;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+        .button-container {
+            display: flex;
+            gap: 30px; /* Gap between buttons */
+            margin-top: 60px; /* Triple the top margin */
+            margin-left: 40px; /* Double the left margin */
+        }
+        .button {
+            border-radius: 8px; /* Smooth corners */
+            width: 350px; /* Width */
+            height: 200px; /* Height */
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .netflix-button {
+            background-color: #0d0d0d; /* Very dark background */
+            border: 1px solid #ffffff; /* Thin white outline */
+        }
+        .netflix-button:hover {
+            background-color: #333333; /* Slightly lighter on hover */
+        }
+        .youtube-button {
+            background-color: #ffffff; /* White background */
+            border: 1px solid #000000; /* Black outline */
+        }
+        .youtube-button:hover {
+            background-color: #e0e0e0; /* Stronger hover color */
+        }
+        .button img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        .full-screen {
+            background-color: #141414;
+            color: #ffffff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .full-screen.hidden {
+            display: none;
+        }
+        .go-back-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #ffffff;
+            color: #000000;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="button-container">
+        <button class="button netflix-button" onclick="showContent('netflix')">
+            <img src="https://images.squarespace-cdn.com/content/v1/5f7f5deaee949577bc10e177/19aeed7c-3287-4c85-b73b-9fd931aabc05/Netflix-Logo.wine.png" alt="Netflix Logo">
+        </button>
+        <button class="button youtube-button" onclick="showContent('youtube')">
+            <img src="https://cdn.wikimg.net/en/strategywiki/images/9/9c/YouTube_logo.png" alt="YouTube Logo">
+        </button>
+    </div>
+    <div id="fullScreen" class="full-screen hidden">
+        <button class="go-back-button" onclick="goBack()">Go Back</button>
+        <iframe id="contentFrame" src="" title="Content Frame"></iframe>
+    </div>
+    <script>
+        function showContent(site) {
+            const iframe = document.getElementById('contentFrame');
+            if (site === 'netflix') {
+                iframe.src = "https://www.netflix.com";
+            } else if (site === 'youtube') {
+                iframe.src = "https://www.youtube.com";
+            }
+            document.getElementById('fullScreen').classList.remove('hidden');
+        }
+
+        function goBack() {
+            document.getElementById('fullScreen').classList.add('hidden');
+            document.getElementById('contentFrame').src = ""; // Clear the iframe content
+        }
+    </script>
+</body>
+</html>
